@@ -126,14 +126,7 @@ def main():
     if dns_provider == 'cloudflare':
         from . import CloudFlareDns
         try:
-            CLOUDFLARE_EMAIL = os.environ['CLOUDFLARE_EMAIL']
-            CLOUDFLARE_API_KEY = os.environ['CLOUDFLARE_API_KEY']
-            CLOUDFLARE_DNS_ZONE_ID = os.environ['CLOUDFLARE_DNS_ZONE_ID']
-
-            dns_class = CloudFlareDns(
-                CLOUDFLARE_DNS_ZONE_ID=CLOUDFLARE_DNS_ZONE_ID,
-                CLOUDFLARE_EMAIL=CLOUDFLARE_EMAIL,
-                CLOUDFLARE_API_KEY=CLOUDFLARE_API_KEY)
+            dns_class = CloudFlareDns()
             logger.info(
                 'chosen_dns_provider',
                 message='Using {0} as dns provider.'.format(dns_provider))
