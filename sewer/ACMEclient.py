@@ -7,8 +7,9 @@ import binascii
 
 try:
     import urlparse
+    from urlparse import urljoin
 except ImportError:
-    from urllib.parse import urlparse
+    from urllib.parse import urlparse, urljoin
 
 import textwrap
 import platform
@@ -292,7 +293,7 @@ class ACMEclient(object):
                 "resource": "new-reg",
                 "agreement": self.ACME_CERTIFICATE_AUTHORITY_TOS
             }
-        url = urlparse.urljoin(self.ACME_CERTIFICATE_AUTHORITY_URL,
+        url = urljoin(self.ACME_CERTIFICATE_AUTHORITY_URL,
                                '/acme/new-reg')
         acme_register_response = self.make_signed_acme_request(
             url=url, payload=payload)
@@ -319,7 +320,7 @@ class ACMEclient(object):
                 "value": domain_name
             }
         }
-        url = urlparse.urljoin(self.ACME_CERTIFICATE_AUTHORITY_URL,
+        url = urljoin(self.ACME_CERTIFICATE_AUTHORITY_URL,
                                '/acme/new-authz')
         challenge_response = self.make_signed_acme_request(
             url=url, payload=payload)
@@ -417,7 +418,7 @@ class ACMEclient(object):
             "resource": "new-cert",
             "csr": self.calculate_safe_base64(self.csr)
         }
-        url = urlparse.urljoin(self.ACME_CERTIFICATE_AUTHORITY_URL,
+        url = urljoin(self.ACME_CERTIFICATE_AUTHORITY_URL,
                                '/acme/new-cert')
         get_certificate_response = self.make_signed_acme_request(url, payload)
         self.logger.info(
