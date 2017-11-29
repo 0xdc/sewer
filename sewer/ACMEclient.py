@@ -375,6 +375,7 @@ class ACMEclient(object):
     def check_challenge_status(self, dns_challenge_url,
                                base64_of_acme_keyauthorization, domain_name):
         self.logger.info('check_challenge')
+        self.logger.info('check_challenge sleep', period=self.ACME_CHALLENGE_WAIT_PERIOD)
         time.sleep(self.ACME_CHALLENGE_WAIT_PERIOD)
         number_of_checks = 0
         maximum_number_of_checks_allowed = 15
@@ -402,6 +403,7 @@ class ACMEclient(object):
                 self.logger.info('check_challenge', error=str(e))
                 break
             if challenge_status == "pending":
+                self.logger.info('check_challenge sleep', period=self.ACME_CHALLENGE_WAIT_PERIOD)
                 time.sleep(self.ACME_CHALLENGE_WAIT_PERIOD)
             elif challenge_status == "valid":
                 self.dns_class.delete_dns_record(
