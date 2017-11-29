@@ -18,7 +18,7 @@ import OpenSSL
 import cryptography
 from structlog import get_logger
 
-import __version__ as sewer_version
+from . import __version__ as sewer_version
 
 
 class ACMEclient(object):
