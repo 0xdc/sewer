@@ -167,7 +167,7 @@ def main():
     account_key = client.account_key
 
     # write out account_key in current directory
-    with open('{0}.account.key'.format(file_name), 'w') as account_file:
+    with open('{0}.account.key'.format(file_name), 'wb') as account_file:
         account_file.write(account_key)
     logger.info(
         "write_account_key",
@@ -181,9 +181,9 @@ def main():
         certificate = client.cert()
 
     # write out certificate and certificate key in current directory
-    with open('{0}.crt'.format(file_name), 'w') as certificate_file:
+    with open('{0}.crt'.format(file_name), 'wb') as certificate_file:
         certificate_file.write(certificate)
-    with open('{0}.key'.format(file_name), 'w') as certificate_key_file:
+    with open('{0}.key'.format(file_name), 'wb') as certificate_key_file:
         certificate_key_file.write(certificate_key)
 
     logger.info("the_end", message=message)
