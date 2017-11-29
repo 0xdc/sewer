@@ -1,5 +1,9 @@
 import json
-import urlparse
+
+try:
+    import urlparse
+except ImportError:
+    from urllib.parse import urlparse
 
 import CloudFlare
 from structlog import get_logger

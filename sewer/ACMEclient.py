@@ -4,7 +4,12 @@ import json
 import base64
 import hashlib
 import binascii
-import urlparse
+
+try:
+    import urlparse
+except ImportError:
+    from urllib.parse import urlparse
+
 import textwrap
 import platform
 
