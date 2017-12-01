@@ -108,12 +108,20 @@ def main():
     endpoint = args.endpoint
     email = args.email
 
-    if account_key:
-        account_key = account_key.read()
     if bundle_name:
         file_name = bundle_name
     else:
         file_name = '{0}'.format(domain)
+
+    if account_key:
+        account_key = account_key.read()
+    else:
+        try:
+            with open('{0}.account.key'.format(file_name), 'r') as account_file:
+                account_key = account_file.read()
+        except IOError:
+            account_key = None
+
     if endpoint == 'staging':
         # TODO: move this to a config.py file.
         # the cli and the client would both read this urls from that config file
