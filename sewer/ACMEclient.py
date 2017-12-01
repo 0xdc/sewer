@@ -410,6 +410,10 @@ class ACMEclient(object):
                 self.dns_class.delete_dns_record(
                     domain_name, base64_of_acme_keyauthorization)
                 break
+            elif challenge_status == "invalid":
+                self.dns_class.delete_dns_record(
+                    domain_name, base64_of_acme_keyauthorization)
+                break
         return check_challenge_status_response
 
     def get_certificate(self):
