@@ -167,11 +167,12 @@ def main():
     account_key = client.account_key
 
     # write out account_key in current directory
-    with open('{0}.account.key'.format(file_name), 'wb') as account_file:
-        account_file.write(account_key)
-    logger.info(
-        "write_account_key",
-        message='account key succesfully written to current directory.')
+    if not client.PRIOR_REGISTERED:
+        with open('{0}.account.key'.format(file_name), 'wb') as account_file:
+            account_file.write(account_key)
+        logger.info(
+            "write_account_key",
+            message='account key succesfully written to current directory.')
 
     if action == 'renew':
         message = 'Certificate Succesfully renewed. The certificate, certificate key and account key have been saved in the current directory'
