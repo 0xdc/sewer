@@ -118,7 +118,7 @@ def main():
     else:
         try:
             with open('{0}.account.key'.format(file_name), 'r') as account_file:
-                account_key = account_file.read()
+                account_key = account_file.read().encode()
         except IOError:
             account_key = None
 
