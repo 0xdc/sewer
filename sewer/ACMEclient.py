@@ -459,6 +459,7 @@ class ACMEclient(object):
                 dns_token)
             self.dns_class.create_dns_record(domain_name,
                                              base64_of_acme_keyauthorization)
+            time.sleep(self.ACME_CHALLENGE_WAIT_PERIOD * 4)
             self.notify_acme_challenge_set(acme_keyauthorization,
                                            dns_challenge_url)
             self.check_challenge_status(
