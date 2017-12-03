@@ -133,15 +133,10 @@ def main():
 
     if dns_provider == 'cloudflare':
         from . import CloudFlareDns
-        try:
-            dns_class = CloudFlareDns()
-            logger.info(
-                'chosen_dns_provider',
-                message='Using {0} as dns provider.'.format(dns_provider))
-        except KeyError as e:
-            logger.info("ERROR:: Please supply {0} as an environment variable.".
-                        format(str(e)))
-            raise
+        dns_class = CloudFlareDns()
+        logger.info(
+            'chosen_dns_provider',
+            message='Using {0} as dns provider.'.format(dns_provider))
 
     elif dns_provider == 'aurora':
         from . import AuroraDns
