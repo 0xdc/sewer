@@ -154,6 +154,12 @@ def main():
             logger.info("ERROR:: Please supply {0} as an environment variable.".
                         format(str(e)))
             raise
+    elif dns_provider == 'rackspace':
+        from . import RackspaceDns
+        dns_class = RackspaceDns()
+        logger.info(
+            'chosen_dns_provider',
+            message='Using {0} as dns provider.'.format(dns_provider))
     else:
         raise ValueError(
             'The dns provider {0} is not recognised.'.format(dns_provider))
