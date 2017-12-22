@@ -43,7 +43,8 @@ class RackspaceDns(common.BaseDns):
         dns_name = '_acme-challenge' + '.' + domain_name
         list_dns_payload = {'type': 'TXT', 'name': dns_name}
 
-        list_dns_response = # XXX: TODO
+        list_dns_response = []
+        # XXX: TODO
 
         for record in list_dns_response:
             dns_record_id = record['id']
@@ -51,3 +52,4 @@ class RackspaceDns(common.BaseDns):
 
     def get_zone_id(self, domain_name):
         # XXX: TODO
+        pass
