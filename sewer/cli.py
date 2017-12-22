@@ -17,17 +17,6 @@ def main():
         sewer \
         --dns cloudflare \
         --domain example.com \
-        --action run
-
-        2. To renew a certificate:
-        CLOUDFLARE_EMAIL=example@example.com \
-        CLOUDFLARE_DNS_ZONE_ID=some-zone \
-        CLOUDFLARE_API_KEY=api-key \
-        sewer \
-        --account_key /path/to/your/account.key \
-        --dns cloudflare \
-        --domain example.com \
-        --action renew
     """
     # TODO: enable people to specify the location where they want certificate and keys to be stored.
     # currently, we store them in the directory from which sewer is ran
@@ -87,14 +76,6 @@ def main():
         required=False,
         help="Email to be used for registration and recovery. \
         eg: --email me@example.com")
-    parser.add_argument(
-        "--action",
-        type=str,
-        required=True,
-        choices=['run', 'renew'],
-        help="The action that you want to perform. \
-        Either run (get a new certificate) or renew (renew a certificate). \
-        eg: --action run")
 
     args = parser.parse_args()
     logger = get_logger(__name__)
@@ -102,7 +83,6 @@ def main():
     dns_provider = args.dns
     domain = args.domain
     alt_domains = args.alt_domains
-    action = args.action
     account_key = args.account_key
     bundle_name = args.bundle_name
     endpoint = args.endpoint
@@ -183,12 +163,8 @@ def main():
             "write_account_key",
             message='account key succesfully written to current directory.')
 
-    if action == 'renew':
-        message = 'Certificate Succesfully renewed. The certificate, certificate key and account key have been saved in the current directory'
-        certificate = client.renew()
-    else:
-        message = 'Certificate Succesfully issued. The certificate, certificate key and account key have been saved in the current directory'
-        certificate = client.cert()
+    message = 'Certificate Succesfully issued. The certificate, certificate key and account key have been saved in the current directory'
+    certificate = client.cert()
 
     # write out certificate and certificate key in current directory
     with open('{0}.crt'.format(file_name), 'wt') as certificate_file:
