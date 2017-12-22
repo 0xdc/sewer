@@ -62,15 +62,6 @@ def main():
         help="The name to use for certificate \
         certificate key and account key. Default is value of domain.")
     parser.add_argument(
-        "--endpoint",
-        type=str,
-        required=False,
-        default='production',
-        choices=['production', 'staging'],
-        help="Whether to use letsencrypt/acme production/live endpoints \
-        or staging endpoints. production endpoints are used by default. \
-        eg: --endpoint staging")
-    parser.add_argument(
         "--email",
         type=str,
         required=False,
@@ -85,7 +76,6 @@ def main():
     alt_domains = args.alt_domains
     account_key = args.account_key
     bundle_name = args.bundle_name
-    endpoint = args.endpoint
     email = args.email
 
     if bundle_name:
@@ -102,14 +92,14 @@ def main():
         except IOError:
             account_key = None
 
-    if endpoint == 'staging':
+    if email:
         # TODO: move this to a config.py file.
         # the cli and the client would both read this urls from that config file
-        GET_NONCE_URL = "https://acme-staging.api.letsencrypt.org/directory"
-        ACME_CERTIFICATE_AUTHORITY_URL = "https://acme-staging.api.letsencrypt.org"
-    else:
         GET_NONCE_URL = "https://acme-v01.api.letsencrypt.org/directory"
         ACME_CERTIFICATE_AUTHORITY_URL = "https://acme-v01.api.letsencrypt.org"
+    else:
+        GET_NONCE_URL = "https://acme-staging.api.letsencrypt.org/directory"
+        ACME_CERTIFICATE_AUTHORITY_URL = "https://acme-staging.api.letsencrypt.org"
 
     if dns_provider == 'cloudflare':
         from . import CloudFlareDns
