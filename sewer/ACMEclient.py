@@ -74,7 +74,7 @@ class ACMEclient(object):
             GET_NONCE_URL="https://acme-v01.api.letsencrypt.org/directory",
             ACME_CERTIFICATE_AUTHORITY_URL="https://acme-v01.api.letsencrypt.org",
             ACME_CERTIFICATE_AUTHORITY_TOS='https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf',
-            ACME_CERTIFICATE_AUTHORITY_CHAIN='https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem'
+            ACME_CERTIFICATE_AUTHORITY_CHAIN='https://letsencrypt.org/certs/lets-encrypt-r3-cross-signed.pem'
     ):
 
         self.logger = get_logger(__name__).bind(
